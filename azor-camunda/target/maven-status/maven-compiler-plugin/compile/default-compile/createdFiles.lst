@@ -1,10 +1,10 @@
 ru\azor\delegate\SimpleDelegate.class
+ru\azor\listener\EndExecutionListener.class
+ru\azor\listener\StartExecutionListener.class
 ru\azor\exception\ExceptionResponse.class
 ru\azor\exception\handler\RestExceptionHandler.class
 ru\azor\controller\ProcessController.class
 ru\azor\config\OpenApiConfiguration.class
 ru\azor\service\ProcessService.class
-ru\azor\delegate\EndProcessTaskDelegate.class
 ru\azor\service\impl\ProcessServiceImpl.class
-ru\azor\delegate\StartProcessTaskDelegate.class
 ru\azor\Application.class
