@@ -13,6 +13,10 @@ import org.testcontainers.utility.DockerImageName;
 
 import javax.sql.DataSource;
 
+/**
+ * Configuration for test docker containers.
+ */
+
 @TestConfiguration
 @Testcontainers
 public class PostgreSqlContainerConfig {
@@ -34,6 +38,11 @@ public class PostgreSqlContainerConfig {
         POSTGRES.start();
     }
 
+    /**
+     * Bean datasource for PostgreSQL in tests.
+     *
+     * @return {@link DataSource}
+     */
     @Bean
     public DataSource dataSource() {
         String connectionUrl = String.format(JDBC_URL_FORMAT,
@@ -50,6 +59,12 @@ public class PostgreSqlContainerConfig {
         return proxyListenerDataSource(dataSource);
     }
 
+    /**
+     * Proxying datasource.
+     *
+     * @param dataSource incoming datasource
+     * @return {@link DataSource}
+     */
     private DataSource proxyListenerDataSource(final DataSource dataSource) {
         ChainListener listener = new ChainListener();
         SLF4JQueryLoggingListener loggingListener = new SLF4JQueryLoggingListener();
