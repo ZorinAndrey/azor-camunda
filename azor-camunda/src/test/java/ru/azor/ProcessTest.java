@@ -3,6 +3,7 @@ package ru.azor;
 import org.assertj.core.api.SoftAssertions;
 import org.camunda.bpm.engine.HistoryService;
 import org.camunda.bpm.engine.RuntimeService;
+import org.camunda.bpm.engine.history.HistoricActivityInstance;
 import org.camunda.bpm.engine.history.HistoricProcessInstance;
 import org.camunda.bpm.engine.runtime.ProcessInstance;
 import org.junit.jupiter.api.DisplayName;
@@ -44,12 +45,16 @@ class ProcessTest {
         List<HistoricProcessInstance> historicProcessInstances = historyService.createHistoricProcessInstanceQuery()
             .processInstanceId(processInstance.getProcessInstanceId()).list();
 
+        List<HistoricActivityInstance> historicActivityInstances = historyService.createHistoricActivityInstanceQuery()
+                .processInstanceId(processInstance.getProcessInstanceId()).list();
+
         SoftAssertions softAssertions = new SoftAssertions();
 
         softAssertions.assertThat(processInstance).isNotNull();
         softAssertions.assertThat(historicProcessInstances).hasSize(1);
         softAssertions.assertThat(historicProcessInstances.get(0).getProcessDefinitionKey())
             .isEqualTo(PROCESS_DEFINITION_KEY);
+        softAssertions.assertThat(historicActivityInstances).hasSize(3);
 
         softAssertions.assertAll();
     }
