@@ -3,7 +3,6 @@ package ru.azor.exception.handler;
 import lombok.extern.slf4j.Slf4j;
 import org.camunda.bpm.engine.AuthenticationException;
 import org.camunda.bpm.engine.ProcessEngineException;
-import org.camunda.bpm.engine.exception.NotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -45,20 +44,6 @@ public class RestExceptionHandler {
     ResponseEntity<Object> handleAuthenticationException(AuthenticationException exception, WebRequest request) {
         return new ResponseEntity<>(basicActions(request, "AuthenticationException", exception.getMessage()),
                                     HttpStatus.SERVICE_UNAVAILABLE
-        );
-    }
-
-    /**
-     * NotFoundException handler.
-     *
-     * @param exception input exception
-     * @param request   incoming request
-     * @return {@link ResponseEntity}
-     */
-    @ExceptionHandler(NotFoundException.class)
-    ResponseEntity<Object> handleNotFoundException(NotFoundException exception, WebRequest request) {
-        return new ResponseEntity<>(basicActions(request, "NotFoundException", exception.getMessage()),
-                                    HttpStatus.NOT_FOUND
         );
     }
 
