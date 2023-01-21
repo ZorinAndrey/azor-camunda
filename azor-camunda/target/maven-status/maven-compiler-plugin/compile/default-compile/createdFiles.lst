@@ -1,3 +1,6 @@
+ru\azor\delegate\SimpleDelegate.class
+ru\azor\exception\ExceptionResponse.class
+ru\azor\exception\handler\RestExceptionHandler.class
 ru\azor\controller\ProcessController.class
 ru\azor\config\OpenApiConfiguration.class
 ru\azor\service\ProcessService.class

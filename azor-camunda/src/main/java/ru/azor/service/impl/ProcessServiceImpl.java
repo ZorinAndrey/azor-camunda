@@ -26,6 +26,6 @@ public class ProcessServiceImpl implements ProcessService {
 
         runtimeService.startProcessInstanceByKey(PROCESS_DEFINITION_KEY);
 
-        log.debug("Process completed with definition key {}", PROCESS_DEFINITION_KEY);
+        log.debug("Process started in service with definition key {}", PROCESS_DEFINITION_KEY);
     }
 }

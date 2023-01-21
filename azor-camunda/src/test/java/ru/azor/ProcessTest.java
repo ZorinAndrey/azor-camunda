@@ -8,14 +8,17 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.transaction.annotation.Transactional;
+import ru.azor.configuration.PostgreSqlContainerConfig;
 
 /**
  * Tests for Camunda process.
  */
 
 @SpringBootTest
-@ActiveProfiles("bpm-process-tests")
+@ContextConfiguration(classes =  PostgreSqlContainerConfig.class)
+@Transactional
 class ProcessTest {
 
     final String PROCESS_DEFINITION_KEY = "azor-camunda-process";
