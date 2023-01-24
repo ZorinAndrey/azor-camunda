@@ -15,16 +15,18 @@ import ru.azor.service.ProcessService;
 @RequiredArgsConstructor
 public class ProcessServiceImpl implements ProcessService {
 
-    private final RuntimeService runtimeService;
+    private static final String AUTHORIZATION_HEADER_VALUE = "authorizationHeaderValue";
+    private static final String ACTIVITY_CHECK_TOKEN_EXECUTION_ID = "Activity_check_token";
     private static final String PROCESS_DEFINITION_KEY = "azor-camunda-process";
+    private final RuntimeService runtimeService;
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void completeProcess() {
+    public void startProcess(String authorizationHeaderValue) {
 
-        runtimeService.startProcessInstanceByKey(PROCESS_DEFINITION_KEY);
+        runtimeService.signalEventReceived("Signal_start_process");
 
         log.debug("Process started in service with definition key {}", PROCESS_DEFINITION_KEY);
     }

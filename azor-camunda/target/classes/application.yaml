@@ -3,6 +3,22 @@ spring.datasource:
   username: postgres
   password: postgres
 
-camunda.bpm.admin-user:
-  id: azor
-  password: azor
+camunda:
+  bpm:
+    admin-user:
+      id: azor
+      password: azor
+
+web-client:
+  keycloak-url: "http://localhost:8000/auth/realms/azor_realm/protocol/openid-connect/userinfo"
+  read-timeout: 3000
+  write-timeout: 3000
+  connect-timeout: 3000
+  response-timeout: 3000
+
+spring:
+  flyway:
+    baselineOnMigrate: true
+    locations: classpath:db/migration
+    schemas: public
+    enabled: true

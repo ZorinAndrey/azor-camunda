@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.ServletWebRequest;
 import org.springframework.web.context.request.WebRequest;
 import ru.azor.exception.ExceptionResponse;
+import ru.azor.exception.UnAuthorizedException;
+
+import javax.ws.rs.BadRequestException;
 
 /**
  * Exception handler for controller.
@@ -18,6 +21,34 @@ import ru.azor.exception.ExceptionResponse;
 @Slf4j
 @ControllerAdvice
 public class RestExceptionHandler {
+
+    /**
+     * BadRequestException handler.
+     *
+     * @param exception input exception
+     * @param request   incoming request
+     * @return {@link ResponseEntity}
+     */
+    @ExceptionHandler(BadRequestException.class)
+    ResponseEntity<Object> handleBadRequestException(BadRequestException exception, WebRequest request) {
+        return new ResponseEntity<>(basicActions(request, "BadRequestException", exception.getMessage()),
+                                    HttpStatus.BAD_REQUEST
+        );
+    }
+
+    /**
+     * UnAuthorizedException handler.
+     *
+     * @param exception input exception
+     * @param request   incoming request
+     * @return {@link ResponseEntity}
+     */
+    @ExceptionHandler(UnAuthorizedException.class)
+    ResponseEntity<Object> handleUnAuthorizedException(UnAuthorizedException exception, WebRequest request) {
+        return new ResponseEntity<>(basicActions(request, "UnAuthorizedException", exception.getMessage()),
+                                    HttpStatus.UNAUTHORIZED
+        );
+    }
 
     /**
      * ProcessEngineException handler.

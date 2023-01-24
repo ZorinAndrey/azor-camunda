@@ -9,5 +9,5 @@ public interface ProcessService {
     /**
      * Method to complete process.
      */
-    void completeProcess();
+    void startProcess(String authorizationHeaderValue);
 }

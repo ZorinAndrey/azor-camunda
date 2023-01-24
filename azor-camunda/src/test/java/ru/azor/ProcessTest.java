@@ -46,7 +46,7 @@ class ProcessTest {
             .processInstanceId(processInstance.getProcessInstanceId()).list();
 
         List<HistoricActivityInstance> historicActivityInstances = historyService.createHistoricActivityInstanceQuery()
-                .processInstanceId(processInstance.getProcessInstanceId()).list();
+            .processInstanceId(processInstance.getProcessInstanceId()).list();
 
         SoftAssertions softAssertions = new SoftAssertions();
 
@@ -54,7 +54,7 @@ class ProcessTest {
         softAssertions.assertThat(historicProcessInstances).hasSize(1);
         softAssertions.assertThat(historicProcessInstances.get(0).getProcessDefinitionKey())
             .isEqualTo(PROCESS_DEFINITION_KEY);
-        softAssertions.assertThat(historicActivityInstances).hasSize(3);
+        softAssertions.assertThat(historicActivityInstances).hasSize(4);
 
         softAssertions.assertAll();
     }
