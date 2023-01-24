@@ -22,3 +22,15 @@ spring:
     locations: classpath:db/migration
     schemas: public
     enabled: true
+
+  mail:
+    host: 'smtp.gmail.com'
+    port: 587
+    username: 'andreyzorin494'
+    password: 'uirrbbsidahkhmkj'
+    properties:
+      mail:
+        smtp:
+          auth: 'true'
+          starttls:
+            enable: 'true'

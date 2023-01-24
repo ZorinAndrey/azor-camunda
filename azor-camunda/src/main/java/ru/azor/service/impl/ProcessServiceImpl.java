@@ -5,6 +5,10 @@ import lombok.extern.slf4j.Slf4j;
 import org.camunda.bpm.engine.RuntimeService;
 import org.springframework.stereotype.Service;
 import ru.azor.service.ProcessService;
+import ru.azor.util.CommonConstants;
+
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * {@inheritDoc}
@@ -15,9 +19,6 @@ import ru.azor.service.ProcessService;
 @RequiredArgsConstructor
 public class ProcessServiceImpl implements ProcessService {
 
-    private static final String AUTHORIZATION_HEADER_VALUE = "authorizationHeaderValue";
-    private static final String ACTIVITY_CHECK_TOKEN_EXECUTION_ID = "Activity_check_token";
-    private static final String PROCESS_DEFINITION_KEY = "azor-camunda-process";
     private final RuntimeService runtimeService;
 
     /**
@@ -26,8 +27,16 @@ public class ProcessServiceImpl implements ProcessService {
     @Override
     public void startProcess(String authorizationHeaderValue) {
 
-        runtimeService.signalEventReceived("Signal_start_process");
+        Map<String, Object> variables = new ConcurrentHashMap<>();
 
-        log.debug("Process started in service with definition key {}", PROCESS_DEFINITION_KEY);
+        variables.put(CommonConstants.VARIABLE_AUTHORIZATION_HEADER_VALUE, authorizationHeaderValue);
+
+        log.debug("Set variable {}", CommonConstants.VARIABLE_AUTHORIZATION_HEADER_VALUE);
+
+        runtimeService.signalEventReceived(CommonConstants.SIGNAL_START_PROCESS_NAME, variables);
+
+        log.debug("Process with definition key {} started by signal start event {}",
+                  CommonConstants.PROCESS_DEFINITION_KEY, CommonConstants.SIGNAL_START_PROCESS_NAME
+        );
     }
 }

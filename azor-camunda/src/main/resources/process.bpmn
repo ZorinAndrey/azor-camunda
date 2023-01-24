@@ -16,7 +16,7 @@
       <bpmn:outgoing>Flow_0cz5jua</bpmn:outgoing>
       <bpmn:outgoing>Flow_0xqkdl3</bpmn:outgoing>
     </bpmn:exclusiveGateway>
-    <bpmn:serviceTask id="Activity_1dgws9f" name="Вторая задача" camunda:delegateExpression="${secondDelegate}">
+    <bpmn:serviceTask id="Activity_save_account" name="Сохранение аккаунта" camunda:delegateExpression="${saveAccountDelegate}">
       <bpmn:incoming>Flow_0xqkdl3</bpmn:incoming>
       <bpmn:outgoing>Flow_1hwrug8</bpmn:outgoing>
     </bpmn:serviceTask>
@@ -76,17 +76,17 @@
         <bpmn:timeDuration xsi:type="bpmn:tFormalExpression">PT10S</bpmn:timeDuration>
       </bpmn:timerEventDefinition>
     </bpmn:intermediateCatchEvent>
-    <bpmn:serviceTask id="Activity_1oq6nse" name="Третья задача" camunda:delegateExpression="${thirdDelegate}">
+    <bpmn:serviceTask id="Activity_be_rich" name="Будь богатым" camunda:delegateExpression="${beRichDelegate}">
       <bpmn:incoming>Flow_0cz5jua</bpmn:incoming>
       <bpmn:incoming>Flow_1926p6i</bpmn:incoming>
       <bpmn:outgoing>Flow_0zuw9nw</bpmn:outgoing>
     </bpmn:serviceTask>
-    <bpmn:serviceTask id="Activity_0f4ak63" name="Четвёртая задача" camunda:delegateExpression="${fourthDelegate}">
+    <bpmn:serviceTask id="Activity_find_tour" name="Поиск путёвки" camunda:delegateExpression="${findTourDelegate}">
       <bpmn:incoming>Flow_0zuw9nw</bpmn:incoming>
       <bpmn:incoming>Flow_15yue6n</bpmn:incoming>
       <bpmn:outgoing>Flow_0b6wg5p</bpmn:outgoing>
     </bpmn:serviceTask>
-    <bpmn:serviceTask id="Activity_0ntb79l" name="Пятая задача" camunda:delegateExpression="${fifthDelegate}">
+    <bpmn:serviceTask id="Activity_save_tour" name="Сохранение путёвки" camunda:delegateExpression="${saveTourDelegate}">
       <bpmn:incoming>Flow_1ju3fqp</bpmn:incoming>
       <bpmn:outgoing>Flow_0pby8dq</bpmn:outgoing>
     </bpmn:serviceTask>
@@ -97,7 +97,7 @@
         <bpmn:timeDuration xsi:type="bpmn:tFormalExpression">PT10S</bpmn:timeDuration>
       </bpmn:timerEventDefinition>
     </bpmn:intermediateCatchEvent>
-    <bpmn:serviceTask id="Activity_0roaork" name="Шестая задача" camunda:delegateExpression="${sixthDelegate}">
+    <bpmn:serviceTask id="Activity_send_email" name="Отправка информации о путёвке на почту" camunda:delegateExpression="${sendEmailDelegate}">
       <bpmn:incoming>Flow_0jta809</bpmn:incoming>
       <bpmn:incoming>Flow_0pby8dq</bpmn:incoming>
       <bpmn:incoming>Flow_08vf6xn</bpmn:incoming>
@@ -110,7 +110,7 @@
         <bpmn:timeDuration xsi:type="bpmn:tFormalExpression">PT10S</bpmn:timeDuration>
       </bpmn:timerEventDefinition>
     </bpmn:intermediateCatchEvent>
-    <bpmn:serviceTask id="Activity_0mp9zhf" name="Седьмая задача" camunda:delegateExpression="${seventhDelegate}">
+    <bpmn:serviceTask id="Activity_congratulations" name="Поздравления" camunda:delegateExpression="${congratulationsDelegate}">
       <bpmn:incoming>Flow_0bgszbf</bpmn:incoming>
       <bpmn:outgoing>Flow_1h6n7gi</bpmn:outgoing>
     </bpmn:serviceTask>
@@ -125,9 +125,12 @@
       <bpmn:outgoing>Flow_03e43lx</bpmn:outgoing>
     </bpmn:parallelGateway>
     <bpmn:endEvent id="EndEvent_0x6ir2l">
+      <bpmn:extensionElements>
+        <camunda:executionListener delegateExpression="${endProcessListener}" event="end" />
+      </bpmn:extensionElements>
       <bpmn:incoming>Flow_03e43lx</bpmn:incoming>
     </bpmn:endEvent>
-    <bpmn:serviceTask id="Activity_1v3xfas" name="Первая задача" camunda:delegateExpression="${firstDelegate}">
+    <bpmn:serviceTask id="Activity_find_account" name="Поиск аккаунта" camunda:delegateExpression="${findAccountDelegate}">
       <bpmn:incoming>Flow_1q2sqrk</bpmn:incoming>
       <bpmn:incoming>Flow_1yobwkj</bpmn:incoming>
       <bpmn:outgoing>Flow_0hejwg2</bpmn:outgoing>
@@ -152,15 +155,15 @@
       <bpmn:startEvent id="Event_0b8dg01">
         <bpmn:outgoing>Flow_1qkvgnc</bpmn:outgoing>
       </bpmn:startEvent>
-      <bpmn:task id="Activity_0tsm655">
-        <bpmn:incoming>Flow_1qkvgnc</bpmn:incoming>
-        <bpmn:outgoing>Flow_1lhwak2</bpmn:outgoing>
-      </bpmn:task>
       <bpmn:endEvent id="Event_0d0oeo1">
         <bpmn:incoming>Flow_1lhwak2</bpmn:incoming>
       </bpmn:endEvent>
-      <bpmn:sequenceFlow id="Flow_1qkvgnc" sourceRef="Event_0b8dg01" targetRef="Activity_0tsm655" />
-      <bpmn:sequenceFlow id="Flow_1lhwak2" sourceRef="Activity_0tsm655" targetRef="Event_0d0oeo1" />
+      <bpmn:sequenceFlow id="Flow_1qkvgnc" sourceRef="Event_0b8dg01" targetRef="Activity_have_rest" />
+      <bpmn:sequenceFlow id="Flow_1lhwak2" sourceRef="Activity_have_rest" targetRef="Event_0d0oeo1" />
+      <bpmn:serviceTask id="Activity_have_rest" name="Отдыхаем!" camunda:delegateExpression="${haveRestDelegation}">
+        <bpmn:incoming>Flow_1qkvgnc</bpmn:incoming>
+        <bpmn:outgoing>Flow_1lhwak2</bpmn:outgoing>
+      </bpmn:serviceTask>
     </bpmn:subProcess>
     <bpmn:subProcess id="Activity_Down">
       <bpmn:incoming>Flow_1uf9bam</bpmn:incoming>
@@ -168,47 +171,47 @@
       <bpmn:startEvent id="Event_08o5osm">
         <bpmn:outgoing>Flow_1hvb5sn</bpmn:outgoing>
       </bpmn:startEvent>
-      <bpmn:task id="Activity_0jp2uen">
-        <bpmn:incoming>Flow_1hvb5sn</bpmn:incoming>
-        <bpmn:outgoing>Flow_0pz31zg</bpmn:outgoing>
-      </bpmn:task>
       <bpmn:endEvent id="Event_1cyfb2g">
         <bpmn:incoming>Flow_0pz31zg</bpmn:incoming>
       </bpmn:endEvent>
-      <bpmn:sequenceFlow id="Flow_1hvb5sn" sourceRef="Event_08o5osm" targetRef="Activity_0jp2uen" />
-      <bpmn:sequenceFlow id="Flow_0pz31zg" sourceRef="Activity_0jp2uen" targetRef="Event_1cyfb2g" />
+      <bpmn:sequenceFlow id="Flow_1hvb5sn" sourceRef="Event_08o5osm" targetRef="Activity_go_on_excursions" />
+      <bpmn:sequenceFlow id="Flow_0pz31zg" sourceRef="Activity_go_on_excursions" targetRef="Event_1cyfb2g" />
+      <bpmn:serviceTask id="Activity_go_on_excursions" name="Ходим на экскурсии" camunda:delegateExpression="${goOnExcursions}">
+        <bpmn:incoming>Flow_1hvb5sn</bpmn:incoming>
+        <bpmn:outgoing>Flow_0pz31zg</bpmn:outgoing>
+      </bpmn:serviceTask>
     </bpmn:subProcess>
-    <bpmn:boundaryEvent id="Event_1o20sqx" attachedToRef="Activity_1dgws9f">
+    <bpmn:boundaryEvent id="Event_1o20sqx" attachedToRef="Activity_save_account">
       <bpmn:outgoing>Flow_01w4kaq</bpmn:outgoing>
-      <bpmn:errorEventDefinition id="ErrorEventDefinition_16fv868" />
+      <bpmn:errorEventDefinition id="ErrorEventDefinition_16fv868" errorRef="Error_0qexivo" />
     </bpmn:boundaryEvent>
-    <bpmn:boundaryEvent id="Event_11n29ii" attachedToRef="Activity_1dgws9f">
+    <bpmn:boundaryEvent id="Event_11n29ii" attachedToRef="Activity_save_account">
       <bpmn:outgoing>Flow_00u0qf0</bpmn:outgoing>
-      <bpmn:errorEventDefinition id="ErrorEventDefinition_1uh2u1l" />
+      <bpmn:errorEventDefinition id="ErrorEventDefinition_1uh2u1l" errorRef="Error_0yrzdkp" />
     </bpmn:boundaryEvent>
-    <bpmn:boundaryEvent id="Event_1mkoiwt" attachedToRef="Activity_1oq6nse">
+    <bpmn:boundaryEvent id="Event_1mkoiwt" attachedToRef="Activity_be_rich">
       <bpmn:outgoing>Flow_1kv5fec</bpmn:outgoing>
-      <bpmn:errorEventDefinition id="ErrorEventDefinition_1rjp53n" />
+      <bpmn:errorEventDefinition id="ErrorEventDefinition_1rjp53n" errorRef="Error_0kv2yig" />
     </bpmn:boundaryEvent>
-    <bpmn:boundaryEvent id="Event_0gin4lw" attachedToRef="Activity_0f4ak63">
+    <bpmn:boundaryEvent id="Event_0gin4lw" attachedToRef="Activity_find_tour">
       <bpmn:outgoing>Flow_0p35zjb</bpmn:outgoing>
-      <bpmn:errorEventDefinition id="ErrorEventDefinition_1y762s8" />
+      <bpmn:errorEventDefinition id="ErrorEventDefinition_1y762s8" errorRef="Error_029nrnu" />
     </bpmn:boundaryEvent>
-    <bpmn:boundaryEvent id="Event_0o543g5" attachedToRef="Activity_0ntb79l">
+    <bpmn:boundaryEvent id="Event_0o543g5" attachedToRef="Activity_save_tour">
       <bpmn:outgoing>Flow_1xrbu9b</bpmn:outgoing>
-      <bpmn:errorEventDefinition id="ErrorEventDefinition_1cxkp4x" />
+      <bpmn:errorEventDefinition id="ErrorEventDefinition_1cxkp4x" errorRef="Error_1mcjav9" />
     </bpmn:boundaryEvent>
-    <bpmn:boundaryEvent id="Event_1scwujy" attachedToRef="Activity_0ntb79l">
+    <bpmn:boundaryEvent id="Event_1scwujy" attachedToRef="Activity_save_tour">
       <bpmn:outgoing>Flow_0sfne5c</bpmn:outgoing>
-      <bpmn:errorEventDefinition id="ErrorEventDefinition_1yzvqyh" />
+      <bpmn:errorEventDefinition id="ErrorEventDefinition_1yzvqyh" errorRef="Error_04bjkbf" />
     </bpmn:boundaryEvent>
-    <bpmn:boundaryEvent id="Event_0cqesu4" attachedToRef="Activity_0roaork">
+    <bpmn:boundaryEvent id="Event_0cqesu4" attachedToRef="Activity_send_email">
       <bpmn:outgoing>Flow_12wuvos</bpmn:outgoing>
-      <bpmn:errorEventDefinition id="ErrorEventDefinition_1p84jlz" />
+      <bpmn:errorEventDefinition id="ErrorEventDefinition_1p84jlz" errorRef="Error_0u0z0ut" />
     </bpmn:boundaryEvent>
-    <bpmn:boundaryEvent id="Event_0l2q10f" attachedToRef="Activity_1v3xfas">
+    <bpmn:boundaryEvent id="Event_0l2q10f" attachedToRef="Activity_find_account">
       <bpmn:outgoing>Flow_0w9izbe</bpmn:outgoing>
-      <bpmn:errorEventDefinition id="ErrorEventDefinition_12lb7pp" />
+      <bpmn:errorEventDefinition id="ErrorEventDefinition_12lb7pp" errorRef="Error_0yrzdkp" />
     </bpmn:boundaryEvent>
     <bpmn:boundaryEvent id="Event_170s33l" attachedToRef="Activity_check_token">
       <bpmn:outgoing>Flow_1vyjcfs</bpmn:outgoing>
@@ -216,44 +219,44 @@
     </bpmn:boundaryEvent>
     <bpmn:sequenceFlow id="Flow_0w9izbe" sourceRef="Event_0l2q10f" targetRef="Event_1465y47" />
     <bpmn:sequenceFlow id="Flow_0ab2idy" sourceRef="Event_1465y47" targetRef="Gateway_1p729ot" />
-    <bpmn:sequenceFlow id="Flow_0hejwg2" sourceRef="Activity_1v3xfas" targetRef="Gateway_07e7l9b" />
+    <bpmn:sequenceFlow id="Flow_0hejwg2" sourceRef="Activity_find_account" targetRef="Gateway_07e7l9b" />
     <bpmn:sequenceFlow id="Flow_050p36z" sourceRef="Event_1nvsfbu" targetRef="Gateway_07e7l9b" />
-    <bpmn:sequenceFlow id="Flow_0cz5jua" sourceRef="Gateway_07e7l9b" targetRef="Activity_1oq6nse" />
-    <bpmn:sequenceFlow id="Flow_0xqkdl3" sourceRef="Gateway_07e7l9b" targetRef="Activity_1dgws9f">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${username == 'test'}</bpmn:conditionExpression>
+    <bpmn:sequenceFlow id="Flow_0cz5jua" sourceRef="Gateway_07e7l9b" targetRef="Activity_be_rich" />
+    <bpmn:sequenceFlow id="Flow_0xqkdl3" sourceRef="Gateway_07e7l9b" targetRef="Activity_save_account">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${userAccount== null}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
-    <bpmn:sequenceFlow id="Flow_1hwrug8" sourceRef="Activity_1dgws9f" targetRef="Gateway_1rh9ou9" />
+    <bpmn:sequenceFlow id="Flow_1hwrug8" sourceRef="Activity_save_account" targetRef="Gateway_1rh9ou9" />
     <bpmn:sequenceFlow id="Flow_01w4kaq" sourceRef="Event_1o20sqx" targetRef="Event_1nvsfbu" />
     <bpmn:sequenceFlow id="Flow_181njmu" sourceRef="Event_1d3sao7" targetRef="Gateway_1rh9ou9" />
-    <bpmn:sequenceFlow id="Flow_1926p6i" sourceRef="Gateway_1rh9ou9" targetRef="Activity_1oq6nse" />
+    <bpmn:sequenceFlow id="Flow_1926p6i" sourceRef="Gateway_1rh9ou9" targetRef="Activity_be_rich" />
     <bpmn:sequenceFlow id="Flow_1kv5fec" sourceRef="Event_1mkoiwt" targetRef="Event_1d3sao7" />
     <bpmn:sequenceFlow id="Flow_0gtyffp" sourceRef="Event_0hagqdi" targetRef="Gateway_1p729ot" />
-    <bpmn:sequenceFlow id="Flow_1yobwkj" sourceRef="Gateway_1p729ot" targetRef="Activity_1v3xfas" />
+    <bpmn:sequenceFlow id="Flow_1yobwkj" sourceRef="Gateway_1p729ot" targetRef="Activity_find_account" />
     <bpmn:sequenceFlow id="Flow_00u0qf0" sourceRef="Event_11n29ii" targetRef="Event_0hagqdi" />
     <bpmn:sequenceFlow id="Flow_0p35zjb" sourceRef="Event_0gin4lw" targetRef="Event_0ewp8l3" />
     <bpmn:sequenceFlow id="Flow_0vy413m" sourceRef="Event_0ewp8l3" targetRef="Gateway_129htx7" />
     <bpmn:sequenceFlow id="Flow_07lsb3v" sourceRef="Event_0xqhdbd" targetRef="Gateway_129htx7" />
-    <bpmn:sequenceFlow id="Flow_15yue6n" sourceRef="Gateway_129htx7" targetRef="Activity_0f4ak63" />
-    <bpmn:sequenceFlow id="Flow_0b6wg5p" sourceRef="Activity_0f4ak63" targetRef="Gateway_1oox0fu" />
+    <bpmn:sequenceFlow id="Flow_15yue6n" sourceRef="Gateway_129htx7" targetRef="Activity_find_tour" />
+    <bpmn:sequenceFlow id="Flow_0b6wg5p" sourceRef="Activity_find_tour" targetRef="Gateway_1oox0fu" />
     <bpmn:sequenceFlow id="Flow_0e8f3k0" sourceRef="Event_1o7gxoh" targetRef="Gateway_1oox0fu" />
-    <bpmn:sequenceFlow id="Flow_0jta809" sourceRef="Gateway_1oox0fu" targetRef="Activity_0roaork" />
-    <bpmn:sequenceFlow id="Flow_1ju3fqp" sourceRef="Gateway_1oox0fu" targetRef="Activity_0ntb79l">
+    <bpmn:sequenceFlow id="Flow_0jta809" sourceRef="Gateway_1oox0fu" targetRef="Activity_send_email" />
+    <bpmn:sequenceFlow id="Flow_1ju3fqp" sourceRef="Gateway_1oox0fu" targetRef="Activity_save_tour">
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${username == 'test'}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="Flow_1xrbu9b" sourceRef="Event_0o543g5" targetRef="Event_0xqhdbd" />
-    <bpmn:sequenceFlow id="Flow_0zuw9nw" sourceRef="Activity_1oq6nse" targetRef="Activity_0f4ak63" />
-    <bpmn:sequenceFlow id="Flow_0pby8dq" sourceRef="Activity_0ntb79l" targetRef="Activity_0roaork" />
+    <bpmn:sequenceFlow id="Flow_0zuw9nw" sourceRef="Activity_be_rich" targetRef="Activity_find_tour" />
+    <bpmn:sequenceFlow id="Flow_0pby8dq" sourceRef="Activity_save_tour" targetRef="Activity_send_email" />
     <bpmn:sequenceFlow id="Flow_0sfne5c" sourceRef="Event_1scwujy" targetRef="Event_1o7gxoh" />
-    <bpmn:sequenceFlow id="Flow_08vf6xn" sourceRef="Event_1tbzghb" targetRef="Activity_0roaork" />
-    <bpmn:sequenceFlow id="Flow_0bgszbf" sourceRef="Activity_0roaork" targetRef="Activity_0mp9zhf" />
+    <bpmn:sequenceFlow id="Flow_08vf6xn" sourceRef="Event_1tbzghb" targetRef="Activity_send_email" />
+    <bpmn:sequenceFlow id="Flow_0bgszbf" sourceRef="Activity_send_email" targetRef="Activity_congratulations" />
     <bpmn:sequenceFlow id="Flow_12wuvos" sourceRef="Event_0cqesu4" targetRef="Event_1tbzghb" />
-    <bpmn:sequenceFlow id="Flow_1h6n7gi" sourceRef="Activity_0mp9zhf" targetRef="Gateway_1eh2au0" />
+    <bpmn:sequenceFlow id="Flow_1h6n7gi" sourceRef="Activity_congratulations" targetRef="Gateway_1eh2au0" />
     <bpmn:sequenceFlow id="Flow_1uf9bam" sourceRef="Gateway_1eh2au0" targetRef="Activity_Down" />
     <bpmn:sequenceFlow id="Flow_09ynkkj" sourceRef="Gateway_1eh2au0" targetRef="Activity_Up" />
     <bpmn:sequenceFlow id="Flow_1eu8pm8" sourceRef="Activity_Up" targetRef="Gateway_0jk4sbb" />
     <bpmn:sequenceFlow id="Flow_10mwaew" sourceRef="Activity_Down" targetRef="Gateway_0jk4sbb" />
     <bpmn:sequenceFlow id="Flow_03e43lx" sourceRef="Gateway_0jk4sbb" targetRef="EndEvent_0x6ir2l" />
-    <bpmn:sequenceFlow id="Flow_1q2sqrk" sourceRef="Activity_check_token" targetRef="Activity_1v3xfas" />
+    <bpmn:sequenceFlow id="Flow_1q2sqrk" sourceRef="Activity_check_token" targetRef="Activity_find_account" />
     <bpmn:sequenceFlow id="Flow_001ywi5" sourceRef="Event_09qjxnb" targetRef="Activity_check_token" />
     <bpmn:sequenceFlow id="Flow_1vyjcfs" sourceRef="Event_170s33l" targetRef="Event_09qjxnb" />
     <bpmn:sequenceFlow id="SequenceFlow_1fp17al" sourceRef="StartEvent" targetRef="Activity_check_token" />
@@ -262,6 +265,13 @@
       <bpmn:signalEventDefinition id="SignalEventDefinition_1dl2xb3" signalRef="Signal_1u893qi" />
     </bpmn:startEvent>
   </bpmn:process>
+  <bpmn:error id="Error_0yrzdkp" name="Error_usernameIsNullError" errorCode="usernameIsNullError" camunda:errorMessage="Username is null" />
+  <bpmn:error id="Error_0qexivo" name="Error_saveUserAccountError" errorCode="saveUserAccountError" camunda:errorMessage="Error when trying save user account" />
+  <bpmn:error id="Error_0kv2yig" name="Error_isNotEnoughRich" errorCode="isNotEnoughRich" camunda:errorMessage="User is not enough rich" />
+  <bpmn:error id="Error_029nrnu" name="Error_userAccountIsNullError" errorCode="userAccountIsNullError" camunda:errorMessage="User account is null" />
+  <bpmn:error id="Error_1mcjav9" name="Error_userAccountIsNullError" errorCode="userAccountIsNullError" camunda:errorMessage="User account is null" />
+  <bpmn:error id="Error_04bjkbf" name="Error_saveTourError" errorCode="saveTourError" camunda:errorMessage="Error when trying save tour" />
+  <bpmn:error id="Error_0u0z0ut" name="Error_sendingMailError" errorCode="sendingMailError" camunda:errorMessage="Error while sanding mail" />
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="azor-camunda-process">
       <bpmndi:BPMNShape id="Event_0haadxv_di" bpmnElement="Event_1465y47">
@@ -270,7 +280,7 @@
       <bpmndi:BPMNShape id="Gateway_07e7l9b_di" bpmnElement="Gateway_07e7l9b" isMarkerVisible="true">
         <dc:Bounds x="715" y="242" width="50" height="50" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_1fx2hiz_di" bpmnElement="Activity_1dgws9f">
+      <bpmndi:BPMNShape id="Activity_1fx2hiz_di" bpmnElement="Activity_save_account">
         <dc:Bounds x="690" y="360" width="100" height="80" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
@@ -301,29 +311,29 @@
       <bpmndi:BPMNShape id="Event_0bs9koo_di" bpmnElement="Event_0xqhdbd">
         <dc:Bounds x="1392" y="512" width="36" height="36" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_1kundmp_di" bpmnElement="Activity_1oq6nse">
+      <bpmndi:BPMNShape id="Activity_1kundmp_di" bpmnElement="Activity_be_rich">
         <dc:Bounds x="870" y="227" width="100" height="80" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_188bhlc_di" bpmnElement="Activity_0f4ak63">
+      <bpmndi:BPMNShape id="Activity_188bhlc_di" bpmnElement="Activity_find_tour">
         <dc:Bounds x="1100" y="227" width="100" height="80" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_01ltdf3_di" bpmnElement="Activity_0ntb79l">
+      <bpmndi:BPMNShape id="Activity_01ltdf3_di" bpmnElement="Activity_save_tour">
         <dc:Bounds x="1310" y="360" width="100" height="80" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_0slq95h_di" bpmnElement="Event_1o7gxoh">
         <dc:Bounds x="1232" y="342" width="36" height="36" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_189vyyv_di" bpmnElement="Activity_0roaork">
+      <bpmndi:BPMNShape id="Activity_189vyyv_di" bpmnElement="Activity_send_email">
         <dc:Bounds x="1530" y="227" width="100" height="80" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_0p8qjkz_di" bpmnElement="Event_1tbzghb">
         <dc:Bounds x="1562" y="102" width="36" height="36" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_1v0cprq_di" bpmnElement="Activity_0mp9zhf">
+      <bpmndi:BPMNShape id="Activity_1v0cprq_di" bpmnElement="Activity_congratulations">
         <dc:Bounds x="1750" y="227" width="100" height="80" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
@@ -336,7 +346,7 @@
       <bpmndi:BPMNShape id="EndEvent_0x6ir2l_di" bpmnElement="EndEvent_0x6ir2l">
         <dc:Bounds x="2342" y="249" width="36" height="36" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_1mzfzq8_di" bpmnElement="Activity_1v3xfas">
+      <bpmndi:BPMNShape id="Activity_1mzfzq8_di" bpmnElement="Activity_find_account">
         <dc:Bounds x="480" y="227" width="100" height="80" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
@@ -560,11 +570,12 @@
       <bpmndi:BPMNShape id="Event_0b8dg01_di" bpmnElement="Event_0b8dg01">
         <dc:Bounds x="352" y="262" width="36" height="36" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_0tsm655_di" bpmnElement="Activity_0tsm655">
-        <dc:Bounds x="450" y="240" width="100" height="80" />
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_0d0oeo1_di" bpmnElement="Event_0d0oeo1">
         <dc:Bounds x="612" y="262" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0ihmjz8_di" bpmnElement="Activity_have_rest">
+        <dc:Bounds x="450" y="240" width="100" height="80" />
+        <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="Flow_1qkvgnc_di" bpmnElement="Flow_1qkvgnc">
         <di:waypoint x="388" y="280" />
@@ -579,21 +590,22 @@
   <bpmndi:BPMNDiagram id="BPMNDiagram_1upaa17">
     <bpmndi:BPMNPlane id="BPMNPlane_07tmozl" bpmnElement="Activity_Down">
       <bpmndi:BPMNShape id="Event_08o5osm_di" bpmnElement="Event_08o5osm">
-        <dc:Bounds x="422" y="242" width="36" height="36" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_0jp2uen_di" bpmnElement="Activity_0jp2uen">
-        <dc:Bounds x="570" y="220" width="100" height="80" />
+        <dc:Bounds x="152" y="102" width="36" height="36" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_1cyfb2g_di" bpmnElement="Event_1cyfb2g">
-        <dc:Bounds x="772" y="242" width="36" height="36" />
+        <dc:Bounds x="502" y="102" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_07nu5cl_di" bpmnElement="Activity_go_on_excursions">
+        <dc:Bounds x="300" y="80" width="100" height="80" />
+        <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="Flow_1hvb5sn_di" bpmnElement="Flow_1hvb5sn">
-        <di:waypoint x="458" y="260" />
-        <di:waypoint x="570" y="260" />
+        <di:waypoint x="188" y="120" />
+        <di:waypoint x="300" y="120" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0pz31zg_di" bpmnElement="Flow_0pz31zg">
-        <di:waypoint x="670" y="260" />
-        <di:waypoint x="772" y="260" />
+        <di:waypoint x="400" y="120" />
+        <di:waypoint x="502" y="120" />
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
