@@ -20,6 +20,7 @@ public class SecondTaskDelegate implements JavaDelegate {
 
         String variableToChange = (String) execution.getVariable(CommonConstants.VARIABLE_TO_CHANGE);
         variableToChange = variableToChange.concat("_2");
+        execution.setVariable(CommonConstants.VARIABLE_TO_CHANGE, variableToChange);
 
         log.info("Changed variable in 'Activity_second': " + variableToChange);
     }
