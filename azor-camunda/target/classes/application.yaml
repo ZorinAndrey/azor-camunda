@@ -1,7 +1,11 @@
-spring.datasource:
-  url: jdbc:postgresql://localhost:5432/postgres
-  username: postgres
-  password: postgres
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/postgres
+    username: postgres
+    password: postgres
+  kafka:
+    consumer:
+      group-id: azor-group
 
 camunda.bpm.admin-user:
   id: azor

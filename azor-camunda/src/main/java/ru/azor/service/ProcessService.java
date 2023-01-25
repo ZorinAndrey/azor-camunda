@@ -1,13 +1,15 @@
 package ru.azor.service;
 
 /**
- * Service to complete process.
+ * Service of process.
  */
 
 public interface ProcessService {
 
     /**
-     * Method to complete process.
+     * Method to pass the event to the process.
+     *
+     * @param event incoming event
      */
-    void completeProcess();
+    void passTheEventToTheProcess(String event);
 }

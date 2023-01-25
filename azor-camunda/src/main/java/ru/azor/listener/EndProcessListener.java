@@ -12,10 +12,10 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Slf4j
-public class EndExecutionListener implements ExecutionListener {
+public class EndProcessListener implements ExecutionListener {
 
     @Override
     public void notify(DelegateExecution execution) {
-        log.info("Process ended");
+        log.info("Process completed");
     }
 }
