@@ -54,7 +54,7 @@ class ProcessTest {
         softAssertions.assertThat(historicProcessInstances).hasSize(1);
         softAssertions.assertThat(historicProcessInstances.get(0).getProcessDefinitionKey())
             .isEqualTo(PROCESS_DEFINITION_KEY);
-        softAssertions.assertThat(historicActivityInstances).hasSize(3);
+        softAssertions.assertThat(historicActivityInstances).hasSize(10);
 
         softAssertions.assertAll();
     }
