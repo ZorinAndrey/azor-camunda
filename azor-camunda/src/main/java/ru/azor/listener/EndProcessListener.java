@@ -18,9 +18,13 @@ public class EndProcessListener implements ExecutionListener {
     @Override
     public void notify(DelegateExecution execution) {
 
-        String variableToChange = (String) execution.getVariable(CommonConstants.VARIABLE_TO_CHANGE);
+        String variableToChangeFirst = (String) execution.getVariable(CommonConstants.VARIABLE_TO_CHANGE_FIRST);
 
-        log.info("VariableToChange in the end of parent process: " + variableToChange);
+        log.info("VariableToChangeFirst in the end of parent process: " + variableToChangeFirst);
+
+        String variableToChangeSecond = (String) execution.getVariable(CommonConstants.VARIABLE_TO_CHANGE_SECOND);
+
+        log.info("VariableToChangeSecond in the end of parent process: " + variableToChangeSecond);
 
         log.info("Process completed");
     }

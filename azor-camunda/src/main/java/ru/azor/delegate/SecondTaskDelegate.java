@@ -18,9 +18,9 @@ public class SecondTaskDelegate implements JavaDelegate {
     public void execute(DelegateExecution execution) {
         log.info("Second sub process service task");
 
-        String variableToChange = (String) execution.getVariable(CommonConstants.VARIABLE_TO_CHANGE);
+        String variableToChange = (String) execution.getVariable(CommonConstants.VARIABLE_TO_CHANGE_SECOND);
         variableToChange = variableToChange.concat("_2");
-        execution.setVariable(CommonConstants.VARIABLE_TO_CHANGE, variableToChange);
+        execution.setVariable(CommonConstants.VARIABLE_TO_CHANGE_SECOND, variableToChange);
 
         log.info("Changed variable in 'Activity_second': " + variableToChange);
     }

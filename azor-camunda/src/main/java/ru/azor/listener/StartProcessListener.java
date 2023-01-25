@@ -16,6 +16,19 @@ public class StartProcessListener implements ExecutionListener {
 
     @Override
     public void notify(DelegateExecution execution) {
-        execution.setVariable(CommonConstants.VARIABLE_TO_CHANGE, CommonConstants.VARIABLE_TO_CHANGE_VALUE);
+        execution.setVariable(CommonConstants.VARIABLE_TO_CHANGE_FIRST, CommonConstants.VARIABLE_TO_CHANGE_VALUE_FIRST);
+
+        log.info(
+            "Set variable {} value: {}", CommonConstants.VARIABLE_TO_CHANGE_FIRST,
+            CommonConstants.VARIABLE_TO_CHANGE_VALUE_FIRST
+        );
+
+        execution.setVariable(
+            CommonConstants.VARIABLE_TO_CHANGE_SECOND, CommonConstants.VARIABLE_TO_CHANGE_VALUE_SECOND);
+
+        log.info(
+            "Set variable {} value: {}", CommonConstants.VARIABLE_TO_CHANGE_SECOND,
+            CommonConstants.VARIABLE_TO_CHANGE_VALUE_SECOND
+        );
     }
 }

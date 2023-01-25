@@ -18,9 +18,9 @@ public class FirstTaskDelegate implements JavaDelegate {
     public void execute(DelegateExecution execution) {
         log.info("First sub process service task");
 
-        String variableToChange = (String) execution.getVariable(CommonConstants.VARIABLE_TO_CHANGE);
+        String variableToChange = (String) execution.getVariable(CommonConstants.VARIABLE_TO_CHANGE_FIRST);
         variableToChange = variableToChange.concat("_1");
-        execution.setVariable(CommonConstants.VARIABLE_TO_CHANGE, variableToChange);
+        execution.setVariable(CommonConstants.VARIABLE_TO_CHANGE_FIRST, variableToChange);
 
         log.info("Changed variable in 'Activity_first': " + variableToChange);
     }
